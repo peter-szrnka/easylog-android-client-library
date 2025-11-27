@@ -105,13 +105,6 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Download Maven repo
-        if: ${{ needs.release.outputs.tag_exists == 'false' }}
-        uses: actions/download-artifact@v4
-        with:
-          name: maven-local
-          path: ~/.m2/repository
-
       - name: Build AAR
         if: ${{ needs.release.outputs.tag_exists == 'false' }}
         run: ./gradlew :client-library:assembleRelease
