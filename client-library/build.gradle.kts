@@ -45,12 +45,6 @@ dependencies {
 
 }
 
-tasks.register<Exec>("buildServerCommon") {
-    workingDir = file("server")
-    commandLine("mvn", "clean", "install", "-DskipTests", "-Ponly-common")
-}
-
-
 publishing {
     publications {
 		register<MavenPublication>("release") {
@@ -58,14 +52,8 @@ publishing {
             artifactId = "android-client-library"
 version = "0.0.2-SNAPSHOT"
 
-            afterEvaluate {
-				val releaseComponent = components.findByName("release")
-                if (releaseComponent != null) {
-					println("Release component found")
-                    from(releaseComponent)
-                } else {
-                    println("No release component found – AAR will not be published!")
-                }
+			afterEvaluate {
+                from(components["release"])
             }
         }
     }
