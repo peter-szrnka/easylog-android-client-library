@@ -63,7 +63,6 @@ jobs:
       - name: Grant execute permission for Gradlew
         if: ${{ steps.check_tag.outputs.tag_exists == 'false' }}
         run: chmod +x ./gradlew
-        working-directory: client
 
       - name: Set releaseVersion
         if: ${{ steps.check_tag.outputs.tag_exists == 'false' }}
