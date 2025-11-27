@@ -46,13 +46,6 @@ jobs:
         run: |
           echo "Tag already exists — skipping release build."
 
-      - name: Set up JDK 25 for Server (Maven)
-        if: ${{ steps.check_tag.outputs.tag_exists == 'false' }}
-        uses: actions/setup-java@v3
-        with:
-          distribution: temurin
-          java-version: 25
-
       - name: Set up JDK 17 for Client (Gradle)
         if: ${{ steps.check_tag.outputs.tag_exists == 'false' }}
         uses: actions/setup-java@v3
@@ -60,9 +53,9 @@ jobs:
           distribution: temurin
           java-version: 17
 
-      - name: Grant execute permission for Gradlew
-        if: ${{ steps.check_tag.outputs.tag_exists == 'false' }}
-        run: chmod +x ./gradlew
+      #- name: Grant execute permission for Gradlew
+      #  if: ${{ steps.check_tag.outputs.tag_exists == 'false' }}
+      #  run: chmod +x ./gradlew
 
       - name: Set releaseVersion
         if: ${{ steps.check_tag.outputs.tag_exists == 'false' }}
