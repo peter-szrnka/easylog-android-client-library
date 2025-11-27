@@ -58,7 +58,7 @@ jobs:
       #  run: chmod +x ./gradlew
 
       - name: Set releaseVersion
-        if: ${{ steps.check_tag.outputs.tag_exists == 'false' }}
+        #if: ${{ steps.check_tag.outputs.tag_exists == 'false' }}
         run: |
           sed -i 's/^[[:space:]]*version *= *".*"/version = "${{ github.event.inputs.releaseVersion }}"/' ./client-library/build.gradle.kts
           git config --global user.name ${{ secrets.GH_USERNAME }}
@@ -70,7 +70,6 @@ jobs:
       - name: Build library (Gradle)
         if: ${{ steps.check_tag.outputs.tag_exists == 'false' }}
         run: ./gradlew :client-library:clean :client-library:build
-        working-directory: client
 
       - name: Create and push release tag
         id: create_tag
