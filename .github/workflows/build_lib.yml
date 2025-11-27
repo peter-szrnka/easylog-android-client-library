@@ -108,7 +108,6 @@ jobs:
       - name: Build AAR
         if: ${{ needs.release.outputs.tag_exists == 'false' }}
         run: ./gradlew :client-library:assembleRelease
-        working-directory: client
 
       - name: Create or update Release
         id: create_release
