@@ -53,9 +53,9 @@ jobs:
           distribution: temurin
           java-version: 17
 
-      #- name: Grant execute permission for Gradlew
-      #  if: ${{ steps.check_tag.outputs.tag_exists == 'false' }}
-      #  run: chmod +x ./gradlew
+      - name: Grant execute permission for Gradlew
+        if: ${{ steps.check_tag.outputs.tag_exists == 'false' }}
+        run: chmod +x ./gradlew
 
       - name: Set releaseVersion
         #if: ${{ steps.check_tag.outputs.tag_exists == 'false' }}
