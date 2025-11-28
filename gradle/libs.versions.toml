@@ -1,8 +1,6 @@
 [versions]
 agp = "8.13.1"
-easylog = "common-0.0.1"
 easylogCommon = "0.0.1-SNAPSHOT"
-gson = "2.13.2"
 kotlin = "2.0.21"
 coreKtx = "1.10.1"
 junit = "4.13.2"
@@ -13,8 +11,6 @@ material = "1.10.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
-easylog = { module = "com.github.peter-szrnka:easylog", version.ref = "easylog" }
-gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
