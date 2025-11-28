@@ -1,63 +1,57 @@
 package io.github.easylog.client
 
-import android.content.Context
+import android.util.Log
 import io.github.easylog.model.LogEntry
 import io.github.easylog.model.LogLevel
 import java.time.ZonedDateTime
 import java.util.UUID
 
-class Log {
+/**
+ * @author Peter Szrnka
+ */
+class EasyLog {
 
     companion object {
-
-        private lateinit var tag: String
-        private var enabled: Boolean = true
 
         private var sessionId: String = UUID.randomUUID().toString()
 
         @JvmStatic
-        fun init(context: Context, logTag: String, enable: Boolean) {
-            tag = logTag
-            enabled = enable
-        }
-
-        @JvmStatic
-        fun i(message: String) {
-            if (!enabled) {
+        fun i(tag: String, message: String) {
+            if (!EasyLogState.enabled) {
                 return
             }
 
-            android.util.Log.i(tag, message)
+            Log.i(tag, message)
             LogQueue.add(buildSaveLogRequest(LogLevel.INFO, tag, message))
         }
 
         @JvmStatic
-        fun d(message: String) {
-            if (!enabled) {
+        fun d(tag: String, message: String) {
+            if (!EasyLogState.enabled) {
                 return
             }
 
-            android.util.Log.d(tag, message)
+            Log.d(tag, message)
             LogQueue.add(buildSaveLogRequest(LogLevel.DEBUG, tag, message))
         }
 
         @JvmStatic
-        fun w(message: String) {
-            if (!enabled) {
+        fun w(tag: String, message: String) {
+            if (!EasyLogState.enabled) {
                 return
             }
 
-            android.util.Log.w(tag, message)
+            Log.w(tag, message)
             LogQueue.add(buildSaveLogRequest(LogLevel.WARN, tag, message))
         }
 
         @JvmStatic
-        fun e(message: String, throwable: Throwable?) {
-            if (!enabled) {
+        fun e(tag: String, message: String, throwable: Throwable?) {
+            if (!EasyLogState.enabled) {
                 return
             }
 
-            android.util.Log.e(tag, message, throwable)
+            Log.e(tag, message, throwable)
             LogQueue.add(buildSaveLogRequest(LogLevel.INFO, tag, message))
         }
 

@@ -3,6 +3,9 @@ package io.github.easylog.client
 import android.content.Context
 import android.net.wifi.WifiManager
 
+/**
+ * @author Peter Szrnka
+ */
 class EasyLogClient(context: Context, private val config: EasyLogClientConfig) {
 
     private val nsdService: NsdService = NsdService(context, config)
@@ -10,6 +13,8 @@ class EasyLogClient(context: Context, private val config: EasyLogClientConfig) {
     //private val lock = wifi.createMulticastLock("mdnsLock")
 
     fun start() {
+        EasyLogState.enabled = config.enabled
+
         if (config.fixAddress != null) {
             EasyLogState.serverHost = config.fixAddress
             EasyLogState.serverFound = true

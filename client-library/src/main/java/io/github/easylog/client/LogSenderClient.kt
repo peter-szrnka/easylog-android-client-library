@@ -14,6 +14,9 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 
+/**
+ * @author Peter Szrnka
+ */
 class LogSenderClient {
 
     companion object {

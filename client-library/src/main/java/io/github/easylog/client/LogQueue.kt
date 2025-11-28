@@ -1,10 +1,12 @@
 package io.github.easylog.client
 
-import android.util.Log
 import io.github.easylog.model.LogEntry
 import java.util.Queue
 import java.util.concurrent.ArrayBlockingQueue
 
+/**
+ * @author Peter Szrnka
+ */
 class LogQueue {
 
     companion object {

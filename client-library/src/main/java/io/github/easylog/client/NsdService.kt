@@ -6,6 +6,9 @@ import android.net.nsd.NsdServiceInfo
 import android.os.Handler
 import android.os.Looper
 
+/**
+ * @author Peter Szrnka
+ */
 class NsdService(context: Context, private val config: EasyLogClientConfig) {
 
     private val logCallback = config.logCallback
