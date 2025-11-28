@@ -50,7 +50,7 @@ publishing {
 		register<MavenPublication>("release") {
             groupId = "io.github.easylog"
             artifactId = "android-client-library"
-version = "0.0.1"
+version = "0.0.2-SNAPSHOT"
 
 			afterEvaluate {
                 from(components["release"])
