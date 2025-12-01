@@ -55,6 +55,7 @@ class EasyLog {
             LogQueue.add(buildSaveLogRequest(LogLevel.INFO, tag, message))
         }
 
+        @JvmStatic
         fun buildSaveLogRequest(logLevel: LogLevel, logTag: String, message: String): LogEntry {
             val request = LogEntry()
             request.messageId = UUID.randomUUID().toString()
