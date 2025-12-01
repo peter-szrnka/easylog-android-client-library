@@ -57,7 +57,7 @@ class EasyLog {
 
         fun buildSaveLogRequest(logLevel: LogLevel, logTag: String, message: String): LogEntry {
             val request = LogEntry()
-            request.correlationId = UUID.randomUUID().toString()
+            request.messageId = UUID.randomUUID().toString()
             request.message = message
             request.tag = logTag
             request.logLevel = logLevel
