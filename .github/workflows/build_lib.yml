@@ -108,7 +108,7 @@ jobs:
       - name: Grant execute permission for Gradlew
         run: chmod +x ./gradlew
       - name: Build AAR
-        if: ${{ needs.release.outputs.tag_exists == 'false' }}
+        # if: ${{ needs.release.outputs.tag_exists == 'false' }}
         run: ./gradlew :client-library:assembleRelease
 
       - name: Create or update Release
