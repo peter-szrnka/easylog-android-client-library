@@ -16,55 +16,47 @@ class EasyLog {
         private var sessionId: String = UUID.randomUUID().toString()
 
         @JvmStatic
-        fun i(tag: String, message: String) {
-            if (!EasyLogState.enabled) {
-                return
-            }
-
+        fun i(tag: String, message: String, metadata: Map<String, String>? = null) {
             Log.i(tag, message)
-            LogQueue.add(buildSaveLogRequest(LogLevel.INFO, tag, message))
+            log(LogLevel.INFO, tag, message, metadata)
         }
 
         @JvmStatic
-        fun d(tag: String, message: String) {
-            if (!EasyLogState.enabled) {
-                return
-            }
-
+        fun d(tag: String, message: String, metadata: Map<String, String>? = null) {
             Log.d(tag, message)
-            LogQueue.add(buildSaveLogRequest(LogLevel.DEBUG, tag, message))
+            log(LogLevel.DEBUG, tag, message, metadata)
         }
 
         @JvmStatic
-        fun w(tag: String, message: String) {
-            if (!EasyLogState.enabled) {
-                return
-            }
-
+        fun w(tag: String, message: String, metadata: Map<String, String>? = null) {
             Log.w(tag, message)
-            LogQueue.add(buildSaveLogRequest(LogLevel.WARN, tag, message))
+            log(LogLevel.WARN, tag, message, metadata)
         }
 
         @JvmStatic
-        fun e(tag: String, message: String, throwable: Throwable?) {
-            if (!EasyLogState.enabled) {
-                return
-            }
-
+        fun e(tag: String, message: String, throwable: Throwable?, metadata: Map<String, String>? = null) {
             Log.e(tag, message, throwable)
-            LogQueue.add(buildSaveLogRequest(LogLevel.INFO, tag, message))
+            log(LogLevel.ERROR, tag, message, metadata)
         }
 
         @JvmStatic
-        fun buildSaveLogRequest(logLevel: LogLevel, logTag: String, message: String): LogEntry {
-            val request = LogEntry()
-            request.messageId = UUID.randomUUID().toString()
-            request.message = message
-            request.tag = logTag
-            request.logLevel = logLevel
-            request.sessionId = sessionId
-            request.timestamp = ZonedDateTime.now()
-            return request
+        private fun log(logLevel: LogLevel, tag: String, message: String, metadata: Map<String, String>? = null) {
+            if (EasyLogState.enabled) {
+                LogQueue.add(buildLogEntry(logLevel, tag, message, metadata))
+            }
+        }
+
+        @JvmStatic
+        fun buildLogEntry(logLevel: LogLevel, logTag: String, message: String, metadata: Map<String, String>? = null): LogEntry {
+            val logEntry = LogEntry()
+            logEntry.messageId = UUID.randomUUID().toString()
+            logEntry.message = message
+            logEntry.tag = logTag
+            logEntry.logLevel = logLevel
+            logEntry.sessionId = sessionId
+            logEntry.timestamp = ZonedDateTime.now()
+            logEntry.metadata = metadata
+            return logEntry
         }
     }
 }
