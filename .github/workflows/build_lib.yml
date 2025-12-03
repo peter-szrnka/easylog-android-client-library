@@ -120,17 +120,11 @@ jobs:
           draft: false
           prerelease: false
           overwrite_files: true
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Upload AAR to Release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: ${{ needs.release.outputs.tag_name }}
           files: |
             client-library/build/outputs/aar/client-library-release.aar
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
       - name: Trigger JitPack build 
         run: | 
           curl -X GET https://jitpack.io/com/github/peter-szrnka/easylog/${{ github.event.inputs.releaseVersion }}/build.log
